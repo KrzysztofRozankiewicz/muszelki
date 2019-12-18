@@ -1,5 +1,9 @@
 import sys
 
+from urllib.request import urlopen
+
+url = urlopen("https://s3.zylowski.net/public/input/3.txt")
+
 def print_menu():
     print(5 * "\n")
     print(25 * "-", "ANALIZATOR TEKSTÓW", 25 * "-")
