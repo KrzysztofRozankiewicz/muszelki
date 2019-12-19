@@ -2,6 +2,7 @@ import sys
 
 from urllib.request import urlopen
 
+
 url = urlopen("https://s3.zylowski.net/public/input/3.txt")
 
 filename = "3.txt"
@@ -30,12 +31,24 @@ def count_letters():
 			if x.isalpha():
 				letters+=1
 
-		print(" Ilość liter w pliku ",filename," to ", str(letters));
+		print(" Ilość liter w pliku ",filename," to ", str(letters))
 	except FileNotFoundError:
 		print(" ** Brak pliku ",filename, " **")
 	except Exception:
 		print(" ** Nie mogę otworzyć pliku ",filename)
-
+		
+def count_words():
+	try:
+		with open(filename, 'r') as myfile:
+			data = myfile.read()
+		
+		words = 0
+		words = len(data.split())
+		print("Ilość wyrazów w pliku " ,filename, " to ", str(words))
+	except FileNotFoundError:
+		print(" ** Nie mogę znaleść pliku ", filename)
+	except Exception:
+		print(" ** Nie mogę otworzyć pliku ",filename)
 
 while True:
 	print_menu()
@@ -61,6 +74,7 @@ while True:
 		count_letters()
 	elif choice == 3:
 		print(" Zliczanie liczby wyrazów w pliku...")
+		count_words()
 	elif choice == 4:
 		print("	Zliczanie znaków interpunkcyjnych w pliku...")
 	elif choice == 5:
