@@ -4,6 +4,8 @@ from urllib.request import urlopen
 
 url = urlopen("https://s3.zylowski.net/public/input/3.txt")
 
+filename = "3.txt"
+
 def print_menu():
     print(5 * "\n")
     print(25 * "-", "ANALIZATOR TEKSTÓW", 25 * "-")
@@ -16,6 +18,23 @@ def print_menu():
     print("7. Zapisz statystyki z punktów 2-5 do pliku statystyki.txt ")
     print("8. Wyjście z programu ")
     print(70 * "-")
+
+
+def count_letters():
+	try:
+		with open(filename, 'r') as myfile:
+			data = myfile.read()
+		
+		letters = 0
+		for x in data:
+			if x.isalpha():
+				letters+=1
+
+		print(" Ilość liter w pliku ",filename," to ", str(letters));
+	except FileNotFoundError:
+		print(" ** Brak pliku ",filename, " **")
+	except Exception:
+		print(" ** Nie mogę otworzyć pliku ",filename)
 
 
 while True:
@@ -39,7 +58,7 @@ while True:
 	if choice == 1:
 		print(" Pobieranie plik z internetu...")
 	elif choice == 2:
-		print(" Zliczanie liczby liter w pobranym pliku...")
+		count_letters()
 	elif choice == 3:
 		print(" Zliczanie liczby wyrazów w pliku...")
 	elif choice == 4:
