@@ -50,6 +50,33 @@ def count_words():
 	except Exception:
 		print(" ** Nie mogę otworzyć pliku ",filename)
 
+def count_punctation():
+        try:
+                with open(filename, 'r') as myfile:
+                        data = myfile.read()
+                        
+                punctation = 0
+                punctation = data.count(".") + data.count("!") + data.count("?") + data.count(",") + data.count("'")
+                print("Ilość znaków interpunkcyjnych w pliku " ,filename, " to ", str(punctation))
+        except FileNotFoundError:
+                print(" ** Nie mogę znaleść pliku ", filename)
+        except Exception:
+                print(" ** Nie mogę otworzyć pliku ",filename)
+
+def count_sentences():
+        try:
+                with open(filename, 'r') as myfile:
+                        data = myfile.read()
+                        
+                sentences = 0
+                sentences = data.count(".") + data.count("!") + data.count("?")
+                print("Ilość zdań w pliku " ,filename, " to ", str(sentences))
+        except FileNotFoundError:
+                print(" ** Nie mogę znaleść pliku ", filename)
+        except Exception:
+                print(" ** Nie mogę otworzyć pliku ",filename) 
+
+
 while True:
 	print_menu()
 	
@@ -77,8 +104,10 @@ while True:
 		count_words()
 	elif choice == 4:
 		print("	Zliczanie znaków interpunkcyjnych w pliku...")
+		count_punctation()
 	elif choice == 5:
 		print(" Zliczanie liczby zdań w pliku...")
+		count_sentences()
 	elif choice == 6:
 		print(" Generowanie raportu użycia liter (A-Z)")
 	elif choice == 7:
