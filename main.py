@@ -1,6 +1,7 @@
 import sys
 
 from urllib.request import urlopen
+from string import ascii_lowercase
 
 
 url = urlopen("https://s3.zylowski.net/public/input/3.txt")
@@ -36,6 +37,7 @@ def count_letters():
 		print(" ** Brak pliku ",filename, " **")
 	except Exception:
 		print(" ** Nie mogę otworzyć pliku ",filename)
+
 		
 def count_words():
 	try:
@@ -49,6 +51,7 @@ def count_words():
 		print(" ** Nie mogę znaleść pliku ", filename)
 	except Exception:
 		print(" ** Nie mogę otworzyć pliku ",filename)
+
 
 def count_punctation():
         try:
@@ -77,6 +80,21 @@ def count_sentences():
         except Exception:
                 print(" ** Nie mogę otworzyć pliku ",filename) 
 
+
+def generate_report():
+	try:
+		with open(filename, 'r') as myfile:
+			data = myfile.read()
+		
+		for char in ascii_lowercase:
+			x = data.count(char) + data.count(char.upper())
+			print( char.upper(),": ",x)
+	except FileNotFoundError:
+		print(" ** Brak pliku ",filename, " **")
+	except Exception:
+		print(" ** Nie mogę otworzyć pliku ",filename)
+
+
 while True:
 	print_menu()
 	
@@ -100,16 +118,13 @@ while True:
 	elif choice == 2:
 		count_letters()
 	elif choice == 3:
-		print(" Zliczanie liczby wyrazów w pliku...")
 		count_words()
 	elif choice == 4:
-		print("	Zliczanie znaków interpunkcyjnych w pliku...")
 		count_punctation()
 	elif choice == 5:
-		print(" Zliczanie liczby zdań w pliku...")
 		count_sentences()
 	elif choice == 6:
-		print(" Generowanie raportu użycia liter (A-Z)")
+		generate_report()
 	elif choice == 7:
 		print(" Zapisywanie statystyki z punktów 2-5 do pliku statystyki.txt...")
 	elif choice == 8:
