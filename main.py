@@ -63,6 +63,7 @@ def count_punctation():
         except Exception:
                 print(" ** Nie mogę otworzyć pliku ",filename)
 
+
 def count_sentences():
         try:
                 with open(filename, 'r') as myfile:
@@ -75,7 +76,6 @@ def count_sentences():
                 print(" ** Nie mogę znaleść pliku ", filename)
         except Exception:
                 print(" ** Nie mogę otworzyć pliku ",filename) 
-
 
 while True:
 	print_menu()
