@@ -105,6 +105,10 @@ def save_stats():
     if os.path.isfile(path):
         os.unlink(path)
 
+    count_letters()
+    count_words()
+    count_punctation()
+    count_sentences()
     myfile = open('statystyki.txt','a')
     myfile.write("Ilość liter: ")
     myfile.write(str(letters))
@@ -112,7 +116,7 @@ def save_stats():
     myfile.write("Ilość słów: ")
     myfile.write(str(words))
     myfile.write("\n")
-    myfile.write("Ilość znaków interpunkcyjnych: ")
+    myfile.write("Ilość znaków interpunkcyjnych: ") 
     myfile.write(str(punctation))
     myfile.write("\n")
     myfile.write("Ilość zdań: ")
