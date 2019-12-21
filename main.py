@@ -7,8 +7,9 @@ import glob
 
 
 filename = "3.txt"
-#url = urlopen("https://s3.zylowski.net/public/input/3.txt")
-urllib.request.urlretrieve("https://s3.zylowski.net/public/input/3.txt", filename)
+
+def download_file():
+	urllib.request.urlretrieve("https://s3.zylowski.net/public/input/3.txt", filename)
 
 
 def print_menu():
@@ -141,6 +142,8 @@ def save_stats():
     myfile.close()
 
 
+download_file()
+
 while True:
 	print_menu()
 	
@@ -161,6 +164,7 @@ while True:
 
 	if choice == 1:
 		print(" Pobieranie plik z internetu...")
+		download_file()
 	elif choice == 2:
 		count_letters()
 	elif choice == 3:
