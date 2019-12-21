@@ -7,6 +7,9 @@ import glob
 
 
 filename = "3.txt"
+#url = urlopen("https://s3.zylowski.net/public/input/3.txt")
+urllib.request.urlretrieve("https://s3.zylowski.net/public/input/3.txt", filename)
+
 
 def download_file():
 	urllib.request.urlretrieve("https://s3.zylowski.net/public/input/3.txt", filename)
@@ -67,7 +70,7 @@ def count_punctation():
 
                 global punctation        
                 punctation = 0
-                punctation = data.count(".") + data.count("!") + data.count("?") + data.count(",") + data.count("'")
+                punctation = data.count(".") + data.count("?")
                 print("Ilość znaków interpunkcyjnych w pliku " ,filename, " to ", str(punctation))
         except FileNotFoundError:
                 print(" ** Nie mogę znaleść pliku ", filename)
