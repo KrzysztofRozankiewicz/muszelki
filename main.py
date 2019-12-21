@@ -1,13 +1,15 @@
 import sys
-
+import urllib.request
 from urllib.request import urlopen
 from string import ascii_lowercase
 import os
+import glob
 
-
-url = urlopen("https://s3.zylowski.net/public/input/3.txt")
 
 filename = "3.txt"
+#url = urlopen("https://s3.zylowski.net/public/input/3.txt")
+urllib.request.urlretrieve("https://s3.zylowski.net/public/input/3.txt", filename)
+
 
 def print_menu():
     print(5 * "\n")
@@ -24,12 +26,13 @@ def print_menu():
 
 
 def count_letters():
+	global letters
+	letters = 0
 	try:
 		with open(filename, 'r') as myfile:
 			data = myfile.read()
 		
-		global letters
-		letters = 0
+		
 		for x in data:
 			if x.isalpha():
 				letters+=1
@@ -98,6 +101,19 @@ def generate_report():
 		print(" ** Brak pliku ",filename, " **")
 	except Exception:
 		print(" ** Nie mogę otworzyć pliku ",filename)
+def exit():
+    fileList = glob.glob('*.txt')
+    if len(fileList) is not 0 :
+       for filePath in fileList:
+            try:
+                os.remove(filePath)
+                print("Usunieto: ", filePath)
+            except:
+                print("Nie mozna usunac pliku : ", filePath)
+
+    else:
+        print("Pliki nie istnieja")
+    sys.exit()
 
 def save_stats():
 
@@ -105,6 +121,10 @@ def save_stats():
     if os.path.isfile(path):
         os.unlink(path)
 
+    count_letters()
+    count_punctation()
+    count_sentences()
+    count_words()
     myfile = open('statystyki.txt','a')
     myfile.write("Ilość liter: ")
     myfile.write(str(letters))
@@ -155,6 +175,6 @@ while True:
 		print(" Zapisywanie statystyki z punktów 2-5 do pliku statystyki.txt...")
 		save_stats()
 	elif choice == 8:
-		sys.exit()
+		exit()
 	else:
 		print("!! DOKONANO NIEPRAWIDŁOWEGO WYBORU !!\n")
